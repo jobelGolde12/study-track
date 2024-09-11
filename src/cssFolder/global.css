@@ -1,0 +1,9 @@
+.pointer{
+    cursor: pointer;
+}
+.hover{
+    color: lightblue;
+}
+.hover-bg{
+    background: #ccc;
+}
