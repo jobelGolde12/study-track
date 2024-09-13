@@ -5,6 +5,16 @@ const routes = [
     path: '/left',
     name: 'leftSidebarComponent',
     component: () => import('../views/LeftComponent.vue')
+  },
+  {
+    path: '/',
+    name: 'homeComponent',
+    component: () => import('../views/rightContent/HomeComponent.vue')
+  },
+  {
+    path: '/upcoming',
+    name: 'upcomingComponent',
+    component: () => import('../views/rightContent/UpcomingComponent.vue')
   }
 ];
 

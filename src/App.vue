@@ -1,7 +1,7 @@
 <template>
   <div class="home bg-dark row" v-if="!welcome">
    <LeftVue class="left col-3 bg-light" />
-   <div class="right col-9 bg-success">
+   <div class="right col-9 bg-light">
     <router-view></router-view>
    </div>
   </div>
@@ -38,6 +38,7 @@ export default {
   position: absolute;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 </style>
