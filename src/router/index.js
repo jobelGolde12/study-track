@@ -15,6 +15,16 @@ const routes = [
     path: '/upcoming',
     name: 'upcomingComponent',
     component: () => import('../views/rightContent/UpcomingComponent.vue')
+  },
+  {
+    path: '/newSubject',
+    name: 'newSubject',
+    component: () => import('../views/rightContent/NewSubject.vue')
+  },
+  {
+    path: '/addTodo',
+    name: 'addTodo',
+    component: () => import('../views/rightContent/NewTodo.vue')
   }
 ];
 

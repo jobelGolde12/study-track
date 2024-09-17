@@ -1,11 +1,11 @@
 <template>
     <div class="main-container p-4">
         <div class="d-flex flex-row justify-content-between align-items-center">
-            <h4 class="text-dark fw-bold"><i class="bi bi-list me-3 fw-bold pointer"></i>StudyTrack</h4>
+            <h4 class="text-dark fw-bold"><i class="hamburger-menu bi bi-list me-3 fw-bold pointer" @click="toggleSidenav"></i>StudyTrack</h4>
             <i class="bi bi-gear fw-bolder d-block fs-5 settings"></i>
         </div>
-
-        <router-link :to="{name: '/', params: {data : taskData}}" class="btn home-nav w-100 mt-2" :class="{'btn-primary' : $route.path=='/', 'btn-secondary' : $route.path !=='/'}">HOME</router-link>
+         
+        <router-link to="/" class="btn home-nav w-100 mt-2" :class="{'btn-primary' : $route.path=='/', 'btn-secondary' : $route.path !=='/'}">HOME</router-link>
         <div class="d-flex flex-column mt-4">
             <div><h5 class="text-dark fw-light ">Task</h5></div>
             <router-link to="/upcoming" class="text-decoration-none pointer task-list p-2 rounded d-flex flex-row align-items-center" :class="{'bg-primary text-light': $route.path == '/upcoming', 'text-dark' : $route.path !== '/upcoming'}"><i class="bi bi-box-arrow-in-right me-2"></i> upcoming <span class="ms-1 fw-bold" :class="{'text-primary' : $route.path !== '/upcoming'}">{{ taskData.upcoming }}</span></router-link>
@@ -84,6 +84,12 @@ export default {
         setIntoLocalStorage(){
             localStorage.setItem('taskData', JSON.stringify(this.taskData));
             localStorage.setItem('subjectsData', JSON.stringify(this.subjectsData));
+
+        },
+        toggleSidenav(){
+            let mainContainer = document.querySelector('.main-container');
+            mainContainer.style.left = '-100%';
+            this.$emit('toggleSidenav', true);            
         }
     },
     mounted(){
@@ -100,5 +106,9 @@ background: #ccc;
 }
 .main-container{
     overflow-y: scroll;
+}
+
+.main-container::-webkit-scrollbar {
+display: none; 
 }
 </style>

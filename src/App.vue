@@ -1,7 +1,7 @@
 <template>
-  <div class="home bg-dark row" v-if="!welcome">
-   <LeftVue class="left col-3 bg-light" />
-   <div class="right col-9 bg-light">
+  <div class="home flex-row align-items-center bg-light" v-if="!welcome">
+   <LeftVue class="left bg-light" @toggleSidenav="toggleSidenav"/>
+   <div class="right bg-light">
     <router-view></router-view>
    </div>
   </div>
@@ -27,6 +27,11 @@ export default {
   methods: {
     toggleWelcome(data){
       this.welcome = data;
+    },
+    toggleSidenav(){
+      let right = document.querySelector('.right');
+      right.style.width = '100%';
+      console.log('toggle sidenav in App.vue called');
     }
   }
 }
@@ -39,6 +44,30 @@ export default {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  left: 0;
+  top: 0;
 }
+.home .left{
+  position: relative;
+  width: 23%;
+  height: 100%;
+}
+.home .right{
+  position: relative;
+  width: 77%;
+  height: 100%;
+}
+@media screen and (max-width: 750px){
 
+ .home .left{
+    display: none;
+  }
+  .home .right{
+    position: relative;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0;
+  }
+}
 </style>

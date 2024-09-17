@@ -6,7 +6,7 @@
 
        <div class="container-fluid d-flex flex-column justify-content-center align-ites-center">
         <div class="text-banner">
-            <h3 class="text-dark text-center fw-bolder">Welcome to Study Track</h3>
+            <h3 class="text-dark text-center fw-bolder mb-0 pb-0">Welcome to Study Track</h3>
             <p class="text-dark fw-normal text-center">Organize your task easily!</p>
 
            <div class="container pt-3 d-flex flex-column justify-content-center align-ites-center">
