@@ -41,6 +41,7 @@
                         <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer">
                             <input type="checkbox" class="pointer d-block">
                             <p class="text-bold d-block">Todo name</p>
+                            <p>Some dummy text</p>
                         </div>
 
                     </div>
