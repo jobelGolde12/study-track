@@ -27,9 +27,10 @@
             <div class="col-6">
                 <h5 class="mt-3">Today</h5>
                 <div class="todos d-flex flex-column gap-2 justify-content-start">
-                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="data in actualTodoData" :key="data.index">
+                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in actualTodoData" :key="data.index" @click="editTodoFunc(index)" data-bs-toggle="modal" data-bs-target="#editTodo">
                         <input type="checkbox" class="pointer d-block">
-                        <p class="text-bold d-block">{{ data.subject }}</p>
+                        <p class="text-bold d-block">{{ data.todo }}</p>
+                        <p class="d-none">{{index}}</p>
                     </div>
 
                 </div>
@@ -41,7 +42,6 @@
                         <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer">
                             <input type="checkbox" class="pointer d-block">
                             <p class="text-bold d-block">Todo name</p>
-                            <p>Some dummy text</p>
                         </div>
 
                     </div>
@@ -49,6 +49,29 @@
             </div>
 
         </div>
+
+
+
+                    <!-- Para sa edit todo  -->
+
+
+                    <div class="modal fade" id="editTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit you todo</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
 
     </div>
 </template>
@@ -59,13 +82,25 @@ export default {
     data() {
         return {
             subjectsData: [],
-            actualTodoData: []
+            actualTodoData: [],
+            editTodoData: []
         }
     },
     methods: {
         getActualTodoData(){
             let data = localStorage.getItem('actualTaskData');
-            this.actualTodoData = data;
+        if (data) {
+            this.actualTodoData = JSON.parse(data); 
+        }
+        console.log("Actual todo data from home=> ", this.actualTodoData);
+
+        for(let i = 0; i < this.actualTodoData.length; i++){
+            console.log('Data from for loop: ' + this.actualTodoData[i].todo);
+        }
+        },
+        editTodoFunc(index){
+            this.editTodoData = this.actualTodoData[index];
+            console.log("The edit todo data is  " + JSON.parse(this.editTodoData) + ' at index of ' + index);
         }
     },
     mounted() {

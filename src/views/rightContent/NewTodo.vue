@@ -39,7 +39,7 @@
                     <div class="col">
                         <p class="text-dark">Action</p>
                         <div class="d-flex flex-row align-items-center gap-2">
-                            <router-link to="/" class="btn btn-secondary w-100" >Cancel</router-link>
+                            <router-link to="/" class="btn btn-secondary w-100" >Go back</router-link>
                             <button class="btn btn-primary w-100">Done</button>
                         </div>
                     </div>
@@ -99,8 +99,11 @@ export default {
             }
         },
         submitDataFunc(){
-            localStorage.setItem('actualTaskData', JSON.stringify(this.taskData));
-            let data = localStorage.getItem('actualTaskData');
+            let existingData = localStorage.getItem('actualTaskData');
+            let submitData = existingData ? JSON.parse(existingData) : []; 
+            const newData = {...this.taskData}; 
+            submitData.push(newData);
+            localStorage.setItem('actualTaskData', JSON.stringify(submitData)); 
 
             this.taskData.todo = '';
             this.taskData.time = '';
@@ -108,12 +111,13 @@ export default {
             this.taskData.subject = '';
             this.taskData.category = '';
 
-            console.log(JSON.parse(data))
+            console.log(JSON.parse(localStorage.getItem('actualTaskData'))); 
             this.todoIsCheck = true;
             setTimeout(() => {
-            this.todoIsCheck = false;
-            },2000)
-        }
+                this.todoIsCheck = false;
+            }, 2000);
+}
+
     },
     mounted(){
         this.getSubjectsData();

@@ -25,6 +25,11 @@ const routes = [
     path: '/addTodo',
     name: 'addTodo',
     component: () => import('../views/rightContent/NewTodo.vue')
+  },
+  {
+    path: '/editTodo',
+    name: 'editTodo',
+    component: () => import('../views/rightContent/EditTodo.vue')
   }
 ];
 

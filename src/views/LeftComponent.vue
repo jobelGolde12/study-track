@@ -35,6 +35,7 @@ export default {
     data(){
         return{
             taskData: {
+                id: '',
                 upcoming: 0,
                 today: 0,
                 done: 0,
