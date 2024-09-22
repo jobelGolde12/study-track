@@ -23,12 +23,11 @@
 <div class="new-todo-button-container">
     <router-link to="/addTodo" class="btn btn-primary align-self-end"><i class="bi bi-plus fw-bolder fs-2"></i></router-link>
 </div>
-        <div class="row">
-            <div class="col-6">
-                <h5 class="mt-3">Today</h5>
+        <div class="row mt-3">
+            <div class="col-12 col-lg-6">
+                <h5 class="">Today</h5>
                 <div class="todos d-flex flex-column gap-2 justify-content-start">
-                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in actualTodoData" :key="data.index" @click="editTodoFunc(index)" data-bs-toggle="modal" data-bs-target="#editTodo">
-                        <input type="checkbox" class="pointer d-block">
+                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in actualTodoData" :key="index" @click="editTodoFunc(index)" data-bs-toggle="modal" data-bs-target="#editTodo">
                         <p class="text-bold d-block">{{ data.todo }}</p>
                         <p class="d-none">{{index}}</p>
                     </div>
@@ -36,8 +35,8 @@
                 </div>
             </div>
 
-                <div class="col-6">
-                    <h5 class="mt-3">Upcoming</h5>
+                <div class="col-12 col-lg-6 upcoming">
+                    <h5 class="">Upcoming</h5>
                     <div class="upcoming-todos d-flex flex-column gap-2 justify-content-start">
                         <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer">
                             <input type="checkbox" class="pointer d-block">
@@ -47,6 +46,20 @@
                     </div>
                 </div>
             </div>
+
+            <div class="container-fluid">
+                        <h5 class="text-dark">Finished</h5>
+                       <div class="finished d-flex flex-column gap-2 justify-content-start">
+                            <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in finished" :key="index">
+                                <input type="checkbox" class="pointer d-block">
+                                <p class="text-bold d-block">{{ data.todo }}</p>
+                                <p class="d-none">{{index}}</p>
+                                asdasd
+                            </div>
+
+                        </div>
+                    </div>
+
 
         </div>
 
@@ -63,7 +76,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            
+                            <input v-model="editTodoData.todo" class="form-control" placeholder="Edit your todo">
+                        <input type="checkbox" class="pointer d-block" @change="finishedTodoFunc(index)">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -72,6 +86,9 @@
                         </div>
                     </div>
                     </div>
+
+
+                  
 
     </div>
 </template>
@@ -83,7 +100,8 @@ export default {
         return {
             subjectsData: [],
             actualTodoData: [],
-            editTodoData: []
+            editTodoData: [],
+            finished: []
         }
     },
     methods: {
@@ -100,7 +118,12 @@ export default {
         },
         editTodoFunc(index){
             this.editTodoData = this.actualTodoData[index];
-            console.log("The edit todo data is  " + JSON.parse(this.editTodoData) + ' at index of ' + index);
+            console.log("The edit todo data is  " + this.editTodoData + ' at index of ' + index);
+        },
+        finishedTodoFunc(index){
+            this.finished.push(this.subjectsData[index]);
+            let data = this.subjectsData.splice(index, 1)
+            console.log(data)
         }
     },
     mounted() {
@@ -108,17 +131,21 @@ export default {
         console.log(JSON.parse(getData));
 
         let getSubjectsData = localStorage.getItem('subjectsData');
-        this.subjectsData = JSON.parse(getSubjectsData);
 
+        if(getSubjectsData){
+            this.subjectsData = JSON.parse(getSubjectsData);
+        }
         this.getActualTodoData();
     }
 }
 </script>
 
 <style lang="css" scoped>
-.card {
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+.main-container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow-y: scroll;
 }
 
 .activity-header {
@@ -190,16 +217,17 @@ display: none;
     background: lightblue;
 }
 .new-todo-button-container{
-    position: absolute;
+    position: fixed;
     display: flex;
     bottom: 3%;
-    right: 5%;
+    right: 10%;
     justify-content: center;
     align-items: center;
     width: 0;
     height: 0;
     background: #ccc;
-border-radius: 50%;
+    border-radius: 50%;
+    z-index: 999;
 }
 .new-todo-button-container .btn{
     border-radius: 50%;
@@ -210,7 +238,12 @@ border-radius: 50%;
     align-items: center;
     animation: 1s animateNewTodoBtn ease infinite;
 }
-
+/* @media screen and (max-width: 1024px){
+    .upcoming{
+        position: relative;
+        transform: translateY(-10%);
+    }
+} */
 @keyframes animateNewTodoBtn{
     from{
         width: 50px;
