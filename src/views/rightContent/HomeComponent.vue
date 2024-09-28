@@ -48,13 +48,12 @@
             </div>
 
             <div class="container-fluid">
-                        <h5 class="text-dark">Finished</h5>
+                        <h5 class="text-dark d-inline">Finished</h5> 
                        <div class="finished d-flex flex-column gap-2 justify-content-start">
                             <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in finished" :key="index">
                                 <input type="checkbox" class="pointer d-block">
                                 <p class="text-bold d-block">{{ data.todo }}</p>
                                 <p class="d-none">{{index}}</p>
-                                asdasd
                             </div>
 
                         </div>
@@ -77,11 +76,11 @@
                         </div>
                         <div class="modal-body">
                             <input v-model="editTodoData.todo" class="form-control" placeholder="Edit your todo">
-                        <input type="checkbox" class="pointer d-block" @change="finishedTodoFunc(index)">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-warning" @click="finishedTodoFunc(editIndex)" data-bs-dismiss="modal">Delete</button>
+                            <button type="button" class="btn btn-primary" @click="saveEditedTodo(editIndex)" data-bs-dismiss="modal">Done</button>
                         </div>
                         </div>
                     </div>
@@ -101,7 +100,8 @@ export default {
             subjectsData: [],
             actualTodoData: [],
             editTodoData: [],
-            finished: []
+            finished: [],
+            editIndex: null
         }
     },
     methods: {
@@ -117,14 +117,27 @@ export default {
         }
         },
         editTodoFunc(index){
-            this.editTodoData = this.actualTodoData[index];
+            this.editTodoData = { ...this.actualTodoData[index] };
+            this.editIndex = index;
             console.log("The edit todo data is  " + this.editTodoData + ' at index of ' + index);
         },
-        finishedTodoFunc(index){
-            this.finished.push(this.subjectsData[index]);
-            let data = this.subjectsData.splice(index, 1)
-            console.log(data)
+        saveEditedTodo() {
+        if (this.editIndex !== null) {
+            this.actualTodoData[this.editIndex] = { ...this.editTodoData };
+            localStorage.setItem('actualTaskData', JSON.stringify(this.actualTodoData));
+            this.editIndex = null;
         }
+        console.log("the index is null")
+    },
+        finishedTodoFunc(index) {
+            this.editIndex = index;
+            this.finished.push(this.actualTodoData[this.editIndex]);
+            this.actualTodoData.splice(index, 1);
+            localStorage.setItem('actualTaskData', JSON.stringify(this.actualTodoData));
+            localStorage.setItem('finishedTasks', JSON.stringify(this.finished));
+            console.log("Todo finished and moved: ", this.finished);
+        }
+
     },
     mounted() {
         let getData = localStorage.getItem('taskData');

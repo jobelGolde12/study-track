@@ -8,10 +8,9 @@
         <router-link to="/" class="btn home-nav w-100 mt-2" :class="{'btn-primary' : $route.path=='/', 'btn-secondary' : $route.path !=='/'}">HOME</router-link>
         <div class="d-flex flex-column mt-4">
             <div><h5 class="text-dark fw-light ">Task</h5></div>
-            <router-link to="/upcoming" class="text-decoration-none pointer task-list p-2 rounded d-flex flex-row align-items-center" :class="{'bg-primary text-light': $route.path == '/upcoming', 'text-dark' : $route.path !== '/upcoming'}"><i class="bi bi-box-arrow-in-right me-2"></i> upcoming <span class="ms-1 fw-bold" :class="{'text-primary' : $route.path !== '/upcoming'}">{{ taskData.upcoming }}</span></router-link>
-            <div class="pointer task-list p-2 rounded d-flex flex-row align-items-center"><i class="bi bi-list-check me-2 text-dark"></i> today <span class="ms-1 fw-bold text-primary">{{ taskData.today }}</span></div>
-            <div class="pointer task-list p-2 rounded d-flex flex-row align-items-center"><i class="bi bi-check me-2 text-dark"></i> done <span class="ms-1 fw-bold text-primary">{{ taskData.done }}</span></div>
-            <div class="pointer task-list p-2 rounded d-flex flex-row align-items-center"><i class="bi bi-calendar-event me-2 text-dark"></i> my calindar <span class="ms-1 fw-bold text-primary">{{ taskData.myCalindar }}</span></div>
+            <router-link to="/upcoming" class="text-decoration-none pointer task-list p-2 rounded d-flex flex-row align-items-center" :class="{'bg-primary text-light': $route.path == '/upcoming', 'text-dark' : $route.path !== '/upcoming'}"><i class="bi bi-box-arrow-in-right me-2"></i> Upcoming <span class="ms-1 fw-bold" :class="{'text-primary' : $route.path !== '/upcoming'}">{{ taskData.upcoming }}</span></router-link>
+            <div class="pointer task-list p-2 rounded d-flex flex-row align-items-center"><i class="bi bi-list-check me-2 text-dark"></i> Today <span class="ms-1 fw-bold text-primary">{{ taskData.today }}</span></div>
+            <div class="pointer task-list p-2 rounded d-flex flex-row align-items-center"><i class="bi bi-check me-2 text-dark"></i> Finished <span class="ms-1 fw-bold text-primary">{{ taskData.done }}</span></div>
 
         </div>
 
