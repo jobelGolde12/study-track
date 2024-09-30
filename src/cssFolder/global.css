@@ -1,7 +1,7 @@
 .pointer{
     cursor: pointer;
 }
-.hover{
+.hover:hover{
     color: lightblue;
 }
 .hover-bg{

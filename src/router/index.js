@@ -30,6 +30,16 @@ const routes = [
     path: '/editTodo',
     name: 'editTodo',
     component: () => import('../views/rightContent/EditTodo.vue')
+  },
+  {
+    path: '/leftSmallScreen',
+    name: 'leftSmallScreen',
+    component: () => import('../views/LeftSmallScreen.vue')
+  },
+  {
+    path: '/settingsComponent',
+    name: 'settingsComponent',
+    component: () => import('../views/SettingsComponent.vue')
   }
 ];
 

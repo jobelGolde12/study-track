@@ -2,12 +2,12 @@
 <div class="main-container">
 
     <div class="container mt-4">
-        <div class="activity-header">
+        <div class="activity-header d-none d-lg-flex flex-direction-row justify-content-between align-items-center">
             <h4>Subjects</h4>
-            <router-link to="/newSubject" class="btn btn-primary">New subject</router-link>
+            <router-link to="/newSubject" class="btn btn-primary d-block">New subject</router-link>
         </div>
 
-        <div class="container-fluid d-flex flex-row gap-2 subjectsContainer">
+        <div class="container-fluid flex-row gap-2 subjectsContainer d-none d-lg-flex">
             <div class="dataHolder" v-for="data in subjectsData" :key="data.index">
                 <img src="../../assets/AP.jpg" alt="AP subject" v-if="data.name == 'AP'">
                 <img src="../../assets/math.jpg" alt="Math subject" v-if="data.name == 'Math'">
@@ -20,18 +20,32 @@
             </div>
         </div>
 
+
+        <!-- Header kapag small ang screen  -->
+         <div class="container-fluid d-flex flex-row justify-content-between align-items-center d-lg-none bg-light">
+            <div>
+                <h3>StudyTrack</h3>
+            </div>
+            <div><router-link to="leftSmallScreen" class="bi bi-list fs-2 fw-bolder small-nav-list mb-3 pointer hover"></router-link></div>
+         </div>
+
 <div class="new-todo-button-container">
     <router-link to="/addTodo" class="btn btn-primary align-self-end"><i class="bi bi-plus fw-bolder fs-2"></i></router-link>
 </div>
         <div class="row mt-3">
             <div class="col-12 col-lg-6">
                 <h5 class="">Today</h5>
-                <div class="todos d-flex flex-column gap-2 justify-content-start">
-                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in actualTodoData" :key="index" @click="editTodoFunc(index)" data-bs-toggle="modal" data-bs-target="#editTodo">
+                <div class="todos d-flex flex-column gap-2 justify-content-start" v-if="actualTodoData.length !== 0">
+                    <div class="container todo-container rounded d-flex flex-row gap-2 align-items-center pointer" v-for="(data,index) in actualTodoData" :key="index" @click="editTodoFunc(index)" data-bs-toggle="modal" data-bs-target="#editTodo" >
                         <p class="text-bold d-block">{{ data.todo }}</p>
                         <p class="d-none">{{index}}</p>
                     </div>
 
+                </div>
+
+                <div class="container todos d-flex flex-column justify-content-center align-items-center" v-if="actualTodoData.length === 0">
+                    <p class="text-dark">Create You First Todo!</p>
+                    <img src="../../assets/create-todo.svg" alt="create todo icon" class="image-fluid create-todo-icon">
                 </div>
             </div>
 
@@ -136,8 +150,8 @@ export default {
             localStorage.setItem('actualTaskData', JSON.stringify(this.actualTodoData));
             localStorage.setItem('finishedTasks', JSON.stringify(this.finished));
             console.log("Todo finished and moved: ", this.finished);
-        }
-
+        },
+     
     },
     mounted() {
         let getData = localStorage.getItem('taskData');
@@ -276,5 +290,9 @@ display: none;
         width: 100px;
         height: 100px;
     }
+}
+.create-todo-icon{
+    width: 60%;
+    height: 60%;
 }
 </style>

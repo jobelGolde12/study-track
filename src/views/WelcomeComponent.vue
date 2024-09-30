@@ -1,6 +1,6 @@
 <template>
     <div class="main-container">
-       <div class="container-fluid p-5 d-flex flex-row justify-content-center align-ites-center">
+       <div class="icon-container pt-5 d-flex flex-row justify-content-center align-ites-center">
         <img src="../assets/taskIcon.svg" alt="Task icon" class="task-icon">
        </div>
 
@@ -40,10 +40,13 @@ export default {
         background: linear-gradient(176deg, rgba(0,212,255,1) 35%, rgba(255,255,255,1) 100%);
         z-index: 999;
     }
+    .icon-container{
+        width: 100vw;
+    }
     .task-icon{
         position: relative;
-        height: 30%;
-        width: 30%;
+        height: 60vh;
+        width: 60vw;
     }
     .get-started{
         width: 30%;
@@ -52,8 +55,9 @@ export default {
     @media screen and (max-width: 750px){
     .task-icon{
         position: relative;
-        height: 50%;
-        width: 50%;
+        height: 50vh;
+        width: 50vw;
+        margin-bottom: 2rem;
     }
     }
 </style>
